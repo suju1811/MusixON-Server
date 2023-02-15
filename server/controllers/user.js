@@ -30,8 +30,8 @@ export const login = async (req,res) =>{
       const token = jwt.sign({email:existingUser.email,id:existingUser._id},process.env.SECRET_KEY,{expiresIn:"7d"});
       //for 1 week
       //set cors optional property to set cookie into the frontend browser
-      res.cookie("jwtoken",token,{expires : new Date(Date.now()+604800000),httpOnly: true,secure:true,sameSite:"none"});
-      res.status(200).json({result: existingUser,token});
+      res.cookie("jwtoken",token,{expires : new Date(Date.now()+604800000)}).status(200).json({result:existingUser,token});
+      //res.status(200).json({result: existingUser,token});
     } catch (error) {
       res.status(500).json({message : "Internal Server Error! Try Again!!"});
     }
@@ -82,8 +82,8 @@ export const googleLogin = async(req,res)=>{
       const hashedPassword = await bcrypt.hash(password,12);
       const result = await User.create({name,email,password:hashedPassword,verified:email_verified});
       const token = jwt.sign({email:result.email,id:result._id},process.env.SECRET_KEY,{expiresIn:"7d"});
-      res.cookie("jwtoken",token,{expires : new Date(Date.now()+604800000),httpOnly: true,secure:true,sameSite:"none"});
-      res.status(201).json({result,token});
+      res.cookie("jwtoken",token,{expires : new Date(Date.now()+604800000)}).status(200).json({result,token});
+      //res.status(201).json({result,token});
     }
     else{
       if(!existingUser.verified){
@@ -96,8 +96,8 @@ export const googleLogin = async(req,res)=>{
        return res.status(400).json({message:"Verify Your Email First."});
       }
       const token = jwt.sign({email:existingUser.email,id:existingUser._id},process.env.SECRET_KEY,{expiresIn:"7d"});
-      res.cookie("jwtoken",token,{expires : new Date(Date.now()+604800000),httpOnly: true,secure:true,sameSite:"none"});
-      res.status(200).json({result: existingUser,token});
+      res.cookie("jwtoken",token,{expires : new Date(Date.now()+604800000)}).status(200).json({result: existingUser,token});
+      // res.status(200).json({result: existingUser,token});
     }
   } catch (error) {
     res.status(500).json({message : "Internal Server Error! Try Again!!"});
