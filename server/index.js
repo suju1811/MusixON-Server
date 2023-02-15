@@ -14,7 +14,7 @@ app.use(bodyParser.json({limit:"30mb",extended : "true"}));
 app.use(bodyParser.urlencoded({limit:"30mb",extended:"true"}));
 app.use(cookieParser());
 app.use(cors({
-    origin:["https://transcendent-toffee-127b69.netlify.app"],
+    origin:["https://musixon-coffee.netlify.app"],
     methods:["POST","GET","PUT"],
     credentials:true
 }));
