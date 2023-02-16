@@ -24,6 +24,7 @@ app.use("/song",songRoutes);
 app.get("/",(req,res)=>{
     res.send("APP IS RUNNING.");
 });
+app.enable("trust proxy");
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(process.env.CONNECTION_URL,{useNewUrlParser: true, useUnifiedTopology: true})
